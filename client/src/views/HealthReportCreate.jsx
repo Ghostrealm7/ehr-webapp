@@ -105,7 +105,7 @@ export default function HealthReportCreate() {
                       />
                     </div>
                   </div>
-                  <div className='border-2'>
+                  <div className='border-2 rounded-l py-4 px-4'>
                     <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
                       Vitals
                     </label>
