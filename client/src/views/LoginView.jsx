@@ -4,7 +4,7 @@ export default function LoginView() {
   return (
       <>
           <div className="flex h-screen">
-            <div className="flex-1 bg-indigo-700 text-white p-8 flex items-center justify-center">
+            <div className="flex-1 bg-gradient-to-r from-indigo-500 to-indigo-800 text-white p-8 flex items-center justify-center">
               <div className=''>
                 <h1 className="text-4xl font-bold mb-4">Electronic Health Records</h1>
                 <p className="text-lg">Digitalizing the Medical industry, one patient at a time</p>
