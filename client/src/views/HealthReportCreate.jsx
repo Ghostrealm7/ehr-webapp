@@ -18,42 +18,35 @@ export default function HealthReportCreate() {
                   <h2 className="text-3xl font-extrabold text-gray-900">Create Medical Report</h2>
                 </div>
                 <form className="mt-8 space-y-6">
+                <div>
+                    <label htmlFor="a_DOB"className="block text-sm font-medium text-gray-700">
+                       Appointment Date
+                    </label>
+                    <div className="mt-1">
+                      <input type="date" id="a_DOB" className='border-2'/>
+                    </div>
+                  </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                      Email address
+                    <label htmlFor="visit_reason" className="block text-sm font-medium text-gray-700">
+                      Appointment Reason
                     </label>
                     <div className="mt-1">
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
+                        id="visit_reason"
+                        type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
+                  
                   <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                      Password
+                    <label htmlFor="diagnosis" className="block text-sm font-medium text-gray-700">
+                      Diagnosis
                     </label>
                     <div className="mt-1">
                       <input
-                        id="password"
-                        type="password"
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
-                      First Name
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="first_name"
+                        id="diagnosis"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -61,12 +54,12 @@ export default function HealthReportCreate() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">
-                      Last Name
+                    <label htmlFor="test" className="block text-sm font-medium text-gray-700">
+                      Lab Test
                     </label>
                     <div className="mt-1">
                       <input
-                        id="last_name"
+                        id="test"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -74,12 +67,25 @@ export default function HealthReportCreate() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                      Phone
+                    <label htmlFor="test_result" className="block text-sm font-medium text-gray-700">
+                      Lab Test Result
                     </label>
                     <div className="mt-1">
                       <input
-                        id="phone"
+                        id="test_result"
+                        type="file"
+                        required
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="remarks" className="block text-sm font-medium text-gray-700">
+                      Remarks
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="remarks"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -87,12 +93,76 @@ export default function HealthReportCreate() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="license_number" className="block text-sm font-medium text-gray-700">
-                      License Number
+                    <label htmlFor="prescription" className="block text-sm font-medium text-gray-700">
+                      Prescription
                     </label>
                     <div className="mt-1">
                       <input
-                        id="license_number"
+                        id="prescription"
+                        type="text"
+                        required
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div className='border-2'>
+                    <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                      Vitals
+                    </label>
+                    <div className="mt-1">
+                        <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                            Temperature
+                        </label>
+                        <input
+                            id="patientid"
+                            type="text"
+                            required
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <div className="mt-1">
+                        <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                            Blood Pressure
+                        </label>
+                        <input
+                            id="patientid"
+                            type="text"
+                            required
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <div className="mt-1">
+                        <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                            Blood Oxygen
+                        </label>
+                        <input
+                            id="patientid"
+                            type="text"
+                            required
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <div className="mt-1">
+                        <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                            Heart Rate
+                        </label>
+                        <input
+                            id="patientid"
+                            type="text"
+                            required
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                  </div>
+
+                  
+                  <div>
+                    <label htmlFor="patientid" className="block text-sm font-medium text-gray-700">
+                      Patient ID
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="patientid"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -100,29 +170,16 @@ export default function HealthReportCreate() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="specialty" className="block text-sm font-medium text-gray-700">
-                      Specialty
+                    <label htmlFor="doctorid" className="block text-sm font-medium text-gray-700">
+                      Doctor ID
                     </label>
                     <div className="mt-1">
                       <input
-                        id="specialty"
+                        id="doctorid"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Gender
-                    </label>
-                    <div>
-                      <input type="radio" id="male" name="gender" value="male" />
-                      <label htmlFor="male" className='pl-2 text-sm font-medium text-gray-700'>Male</label>
-                    </div>
-                    <div>
-                      <input type="radio" id="female" name="gender" value="female" />
-                      <label htmlFor="female" className='pl-2 text-sm font-medium text-gray-700'>Female</label>
                     </div>
                   </div>
                   <div>
