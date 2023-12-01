@@ -6,6 +6,7 @@ import LoginView from './views/LoginView'
 import RegisterPatient from './views/RegisterPatient'
 import RegisterDoctor from './views/RegisterDoctor'
 import HealthReportCreate from './views/HealthReportCreate'
+import Layout from './components/Layout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,7 +17,10 @@ function App() {
         <Router>
           {/* <Navbar /> */}
             <Routes>
-              <Route path="/" element={<AdminView />}/>
+              <Route path="/" element={<Layout />}>
+                <Route path="/overview" element={<AdminView />} />
+                <Route path="/patientlist" element={<AdminView />} />
+              </Route>
               <Route path="/adminview" element={<AdminView />}/>
               <Route path="/login" element={<LoginView />}/>
               <Route path="/register/patient" element={<RegisterPatient />}/>
