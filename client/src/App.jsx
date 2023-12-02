@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './index.css'
 import { BrowserRouter as Router, Route ,Routes} from "react-router-dom"
-import AdminView from './views/AdminView'
+import Overview from './views/Overview'
 import LoginView from './views/LoginView'
 import RegisterPatient from './views/RegisterPatient'
 import RegisterDoctor from './views/RegisterDoctor'
@@ -18,10 +18,10 @@ function App() {
           {/* <Navbar /> */}
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route path="/overview" element={<AdminView />} />
-                <Route path="/patientlist" element={<AdminView />} />
+                <Route path="/overview" element={<Overview />} />
+                <Route path="/patientlist" element={<RegisterPatient />} />
               </Route>
-              <Route path="/adminview" element={<AdminView />}/>
+              <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>
               <Route path="/register/patient" element={<RegisterPatient />}/>
               <Route path="/register/doctor" element={<RegisterDoctor />}/>

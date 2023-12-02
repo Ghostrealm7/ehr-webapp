@@ -37,13 +37,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     {
 		key: 'medicalcenter',
 		label: 'Medical Center',
-		path: '/overview',
+		path: '/',
 		icon: <FaClinicMedical />
 	},
 	{
 		key: 'messages',
 		label: 'Messages',
-		path: '/overview',
+		path: '/',
 		icon: <HiOutlineAnnotation />
 	}
     

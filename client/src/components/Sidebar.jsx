@@ -10,17 +10,17 @@ const linkClass =
 
 export default function Sidebar() {
   return (
-		<div className="bg-indigo-900 w-60 p-3 flex flex-col">
+		<div className="bg-violet-900 w-60 p-3 flex flex-col">
 			<div className="flex items-center gap-2 px-1 py-3 text-white">
 				<MdHealthAndSafety fontSize={24} />
-				<span className="text-lg">EHR WebApp</span>
+				<span className="text-lg">EHR webapp</span>
 			</div>
 			 <div className="py-8 flex flex-1 flex-col gap-0.5">
 				{DASHBOARD_SIDEBAR_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
 			</div>
-			<div className="flex flex-col gap-0.5 pt-2 border-t border-indigo-600">
+			<div className="flex flex-col gap-0.5 pt-2 border-t border-violet-200">
 				{DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
@@ -41,7 +41,7 @@ function SidebarLink({ link }) {
 	return (
 		<Link
 			to={link.path}
-			className={classNames(pathname === link.path ? 'bg-indigo-600 text-white font-bold' : 'text-neutral-400', linkClass)}
+			className={classNames(pathname === link.path ? 'bg-violet-700 text-white font-bold' : 'text-neutral-400', linkClass)}
 		>
 			<span className="text-xl">{link.icon}</span>
 			{link.label}
