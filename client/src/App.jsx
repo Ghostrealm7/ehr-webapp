@@ -7,6 +7,9 @@ import RegisterPatient from './views/RegisterPatient'
 import RegisterDoctor from './views/RegisterDoctor'
 import HealthReportCreate from './views/HealthReportCreate'
 import Layout from './components/Layout'
+import PatientPanel from './views/PatientPanel'
+import DoctorPanel from './views/DoctorPanel'
+import MedicalReportPanel from './views/MedicalReportPanel'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,7 +22,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route path="/overview" element={<Overview />} />
-                <Route path="/patientlist" element={<RegisterPatient />} />
+                <Route path="/patientpanel" element={<PatientPanel />} />
+                <Route path="/doctorpanel" element={<DoctorPanel />} />
+                <Route path="/medicalreportpanel" element={<MedicalReportPanel />} />
               </Route>
               <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>

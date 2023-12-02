@@ -24,7 +24,7 @@ export default function Sidebar() {
 				{DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
-				<div className={classNames(linkClass, 'cursor-pointer text-red-500')}>
+				<div className={classNames(linkClass, 'cursor-pointer text-red-500 font-bold')}>
 					<span className="text-xl">
 						<HiOutlineLogout />
 					</span>

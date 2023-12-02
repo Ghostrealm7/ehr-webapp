@@ -19,19 +19,19 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     {
         key: 'docto',
         label: 'Doctor',
-        path: '/',
+        path: '/doctorpanel',
         icon: <GiPlagueDoctorProfile />
     },
 	{
 		key: 'patient',
 		label: 'Patient',
-		path: '/',
+		path: '/patientpanel',
 		icon: <HiUserGroup />
 	},
     {
 		key: 'medicalreports',
 		label: 'Medical Report',
-		path: '/',
+		path: '/medicalreportpanel',
 		icon: <HiOutlineCube />
 	},
     {

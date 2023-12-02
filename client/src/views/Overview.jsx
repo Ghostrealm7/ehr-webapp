@@ -1,11 +1,9 @@
 import React from 'react'
 import DashboardStatsGrid from '../components/DashboardStatsGrid'
 import BarChartStats from '../components/BarChartStats'
-// import RecentOrders from '../components/RecentOrders'
 import PieChartStats from '../components/PieChartStats'
 import PieChartStats2 from '../components/PieChartStats2'
 import PieChartStats3 from '../components/PieChartStats3'
-// import PopularProducts from '../components/PopularProducts'
 
 export default function Overview() {
 	return (
@@ -19,10 +17,6 @@ export default function Overview() {
         <PieChartStats2 />
         <PieChartStats3 />
 			</div>
-			{/* <div className="flex flex-row gap-4 w-full">
-				<RecentOrders />
-				<PopularProducts />
-			</div> */}
 		</div>
 	)
 }
