@@ -7,7 +7,7 @@ export default function MedicalReportPanel() {
   const navigate = useNavigate();
 
   const navigateHealthReportCreate = () => {
-          navigate('/healthreport/create');
+          navigate('/medicalreport/create');
           };
   return (
     <>
