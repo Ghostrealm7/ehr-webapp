@@ -32,7 +32,7 @@ function App() {
               <Route path="/login" element={<LoginView />}/>
               <Route path="/register/patient" element={<RegisterPatient />}/>
               <Route path="/register/doctor" element={<RegisterDoctor />}/>
-              <Route path="/healthreport/create" element={<HealthReportCreate />}/>
+              <Route path="/medicalreport/create" element={<HealthReportCreate />}/>
             </Routes>
         </Router>
       </div>
