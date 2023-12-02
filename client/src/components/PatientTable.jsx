@@ -94,7 +94,8 @@ export default function PatientTable() {
 									<Link to={`/order/${order.id}`}>#{order.id}</Link>
 								</td>
 								<td>
-									<Link to={`/customer/${order.customer_id}`}>{order.customer_name}</Link>
+									<Link to={`/patientprofile`}>{order.customer_name}</Link>
+									{/* <Link to={`/patientprofile/${order.customer_id}`}>{order.customer_name}</Link> */}
 								</td>
                                 <td>{order.gender}</td>
                                 <td>{order.blood_group}</td>
