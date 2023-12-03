@@ -7,7 +7,7 @@ import { IoPeople} from 'react-icons/io5'
 export default function DashboardStatsGrid() {
 	return (
 		<div className="flex gap-4">
-			<div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full'>
+			<div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full rounded-xl'>
 				<div className="rounded-full h-20 w-20 flex items-center justify-center bg-violet-600">
 					<TbReportMedical className="text-5xl text-white" />
 				</div>
@@ -19,7 +19,7 @@ export default function DashboardStatsGrid() {
 					</div>
 				</div>
 			</div>
-			<div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full'>
+			<div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full rounded-xl'>
 				<div className="rounded-full h-20 w-20 flex items-center justify-center bg-sky-400">
 					<IoPeople className="text-5xl text-white" />
 				</div>
@@ -32,7 +32,7 @@ export default function DashboardStatsGrid() {
 				</div>
             </div>
             
-            <div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full'>
+            <div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full rounded-xl'>
 				<div className="rounded-full h-20 w-20 flex items-center justify-center bg-indigo-600">
 					<GiPlagueDoctorProfile className="text-5xl text-white" />
 				</div>
@@ -45,7 +45,7 @@ export default function DashboardStatsGrid() {
 				</div>
             </div>
 
-            <div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full'>
+            <div className='p-4 flex bg-white shadow-lg justify-center items-center basis-full rounded-xl'>
 
 				<div className="rounded-full h-20 w-20 flex items-center justify-center bg-fuchsia-600">
 					<FaClinicMedical className="text-5xl text-white" />

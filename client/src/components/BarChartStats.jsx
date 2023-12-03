@@ -66,7 +66,7 @@ const data = [
 
 export default function BarChartStats() {
 	return (
-		<div className="h-[22rem] bg-white p-4 rounded-sm shadow-lg flex flex-col flex-1">
+		<div className="h-[22rem] bg-white p-4 rounded-xl shadow-lg flex flex-col flex-1">
 			<strong className="text-gray-700 text-sm font-bold">PATIENTS</strong>
 			<div className="mt-3 w-full flex-1 text-xs">
 				<ResponsiveContainer width="100%" height="100%">

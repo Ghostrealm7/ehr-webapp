@@ -6,11 +6,11 @@ import { HiOutlineLogout } from 'react-icons/hi'
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../library/navigation';
 
 const linkClass =
-	'flex items-center gap-2 px-3 py-2 hover:bg-indigo-600 hover:no-underline active:bg-indigo-300 rounded-md text-base'
+	'flex items-center gap-2 px-3 py-2 hover:bg-gray-600 hover:no-underline active:bg-indigo-900 rounded-md text-base'
 
 export default function Sidebar() {
   return (
-		<div className="bg-violet-900 w-60 p-3 flex flex-col">
+		<div className="bg-gray-800 w-60 p-3 flex flex-col">
 			<div className="flex items-center gap-2 px-1 py-3 text-white">
 				<MdHealthAndSafety fontSize={24} />
 				<span className="text-lg">EHR webapp</span>
@@ -41,7 +41,7 @@ function SidebarLink({ link }) {
 	return (
 		<Link
 			to={link.path}
-			className={classNames(pathname === link.path ? 'bg-violet-700 text-white font-bold' : 'text-neutral-400', linkClass)}
+			className={classNames(pathname === link.path ? 'bg-indigo-900 text-white font-bold' : 'text-neutral-400', linkClass)}
 		>
 			<span className="text-xl">{link.icon}</span>
 			{link.label}
