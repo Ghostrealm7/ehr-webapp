@@ -1,6 +1,37 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios';
+import { RadioGroup } from '@headlessui/react';
 
 export default function RegisterPatient() {
+  const [patientName, setPatientName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nid, setNid] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [date, setDate] = useState();
+
+  const submitPatientData = async e => {
+    e.preventDefault()
+    try {
+        await Axios.post("http://localhost:3500/api/register_patient", {
+        patientName: patientName,
+        patientEmail: email,
+        password: password,
+        nid: nid,
+        phone: phone,
+        address: address,
+        gender: gender,
+        bloodgroup: bloodGroup,
+        date: date,
+      })
+  }catch(err){
+    console.log(err)
+  }
+}
+  
   return (
       <>
           <div className="flex h-screen">
@@ -24,10 +55,12 @@ export default function RegisterPatient() {
                     </label>
                     <div className="mt-1">
                       <input
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
                         id="email"
                         name="email"
-                        type="email"
-                        autoComplete="email"
+                        type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
@@ -39,21 +72,11 @@ export default function RegisterPatient() {
                     </label>
                     <div className="mt-1">
                       <input
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}                      
                         id="password"
-                        type="password"
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
-                      First Name
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="first_name"
+                        name="password"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -61,12 +84,16 @@ export default function RegisterPatient() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">
-                      Last Name
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                      Name
                     </label>
                     <div className="mt-1">
                       <input
-                        id="last_name"
+                        onChange={(e) => {
+                          setPatientName(e.target.value);
+                        }}                      
+                        id="name"
+                        name="name"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -79,7 +106,11 @@ export default function RegisterPatient() {
                     </label>
                     <div className="mt-1">
                       <input
+                         onChange={(e) => {
+                          setNid(e.target.value);
+                        }}                     
                         id="nid"
+                        name="nid"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -92,6 +123,10 @@ export default function RegisterPatient() {
                     </label>
                     <div className="mt-1">
                       <input
+                         onChange={(e) => {
+                          setPhone(e.target.value);
+                        }}        
+                        name="name"             
                         id="phone"
                         type="text"
                         required
@@ -105,24 +140,45 @@ export default function RegisterPatient() {
                     </label>
                     <div className="mt-1">
                       <input
+                        onChange={(e) => {
+                          setAddress(e.target.value);
+                        }}                      
                         id="address"
+                        name="address"
                         type="text"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
+                  {/* <RadioGroup value={gender} onChange={setGender}>
+                    <RadioGroup.Label>Gender</RadioGroup.Label>
+                    <RadioGroup.Option value="male">
+                      {({ checked }) => (
+                        <span className={checked ? 'bg-blue-800' : ''}>Male</span>
+                      )}
+                    </RadioGroup.Option>
+                    <RadioGroup.Option value="female">
+                      {({ checked }) => (
+                        <span className={checked ? 'bg-blue-800' : ''}>Female</span>
+                      )}
+                    </RadioGroup.Option>
+                  </RadioGroup>                   */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Gender
+                    <label htmlFor="blood_group" className="block text-sm font-medium text-gray-700">
+                      Blood Group
                     </label>
-                    <div>
-                      <input type="radio" id="male" name="gender" value="male" />
-                      <label htmlFor="male" className='pl-2 text-sm font-medium text-gray-700'>Male</label>
-                    </div>
-                    <div>
-                      <input type="radio" id="female" name="gender" value="female" />
-                      <label htmlFor="female" className='pl-2 text-sm font-medium text-gray-700'>Female</label>
+                    <div className="mt-1">
+                      <input
+                        onChange={(e) => {
+                          setBloodGroup(e.target.value);
+                        }}                     
+                        id="blood_group"
+                        name="blood_group"
+                        type="text"
+                        required
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
                     </div>
                   </div>
 
@@ -131,11 +187,19 @@ export default function RegisterPatient() {
                        Date of Birth
                     </label>
                     <div className="mt-1">
-                      <input type="date" id="DOB" className='border-2'/>
+                      <input 
+                      onChange={(e) => {
+                        setDate(e.target.value);
+                      }} 
+                      type="date" 
+                      id="DOB" 
+                      name="DOB"
+                      className='border-2'/>
                     </div>
                   </div>
                   <div>
                     <button
+                      onClick={submitPatientData}
                       type="submit"
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
@@ -148,4 +212,4 @@ export default function RegisterPatient() {
           </div>  
       </>
       );
-}
+};

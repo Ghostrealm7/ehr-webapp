@@ -7,7 +7,7 @@ export default function PatientPanel() {
     const navigate = useNavigate();
 
     const navigateRegister = () => {
-            navigate('/register/patient');
+            navigate('/register_patient');
             };
   return (
     <>

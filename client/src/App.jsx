@@ -30,7 +30,7 @@ function App() {
               </Route>
               <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>
-              <Route path="/register/patient" element={<RegisterPatient />}/>
+              <Route path="/register_patient" element={<RegisterPatient />}/>
               <Route path="/register/doctor" element={<RegisterDoctor />}/>
               <Route path="/medicalreport/create" element={<HealthReportCreate />}/>
             </Routes>

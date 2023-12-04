@@ -4,7 +4,8 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
 const data = [
 	{ name: 'Diabetes', value: 540 },
 	{ name: 'Influenza', value: 620 },
-	{ name: 'Cancer', value: 210 }
+	{ name: 'Cancer', value: 210 },
+	{ name: 'HIV', value: 210 }
 ]
 
 const RADIAN = Math.PI / 180
