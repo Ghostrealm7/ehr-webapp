@@ -27,7 +27,7 @@ app.use(cors())
 
 app.post('/api/register_patient', (req, res) => {
     console.log(req.body);
-    const patientName = req.body.patientName
+    const name = req.body.patientName
     const email = req.body.patientEmail
     const password = req.body.password
     const nid = req.body.nid
@@ -35,12 +35,13 @@ app.post('/api/register_patient', (req, res) => {
     const address = req.body.address
     const gender = req.body.gender
     const bloodgroup = req.body.bloodgroup
-    const date = req.body.date
+    const dob = req.body.date
 
-    // const sqlInsert = "INSERT INTO user (patientName, email, password, nid, phone, address, gender, bloodgroup, date) VALUES (?)"
-    // db.query(sqlInsert,[patientName, email, password, nid, phone, address, gender, bloodgroup, date], (err, result) =>{
-    //     // console.log(result);
-    // })
+    const sqlInsert = "INSERT INTO user (name, email, password, nid, phone, address, gender, bloodgroup, dob) VALUES (?,?,?,?,?,?,?,?,?)"
+    db.query(sqlInsert, [name, email, password, nid, phone, address, gender, bloodgroup, dob], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
 }); 
 
 // app.get('api/patient_table', (req, res) => {
