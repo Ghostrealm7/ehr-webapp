@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { RadioGroup } from '@headlessui/react';
 
 export default function RegisterPatient() {
@@ -16,7 +16,7 @@ export default function RegisterPatient() {
   const submitPatientData = async e => {
     e.preventDefault()
     try {
-        await Axios.post("http://localhost:3500/api/register_patient", {
+        await axios.post("http://localhost:3500/api/register_patient", {
         patientName: patientName,
         patientEmail: email,
         password: password,

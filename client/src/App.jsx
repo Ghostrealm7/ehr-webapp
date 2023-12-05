@@ -13,8 +13,6 @@ import MedicalReportPanel from './views/MedicalReportPanel'
 import PatientProfile from './views/PatientProfile'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <div>
@@ -26,7 +24,7 @@ function App() {
                 <Route path="/patientpanel" element={<PatientPanel />} />
                 <Route path="/doctorpanel" element={<DoctorPanel />} />
                 <Route path="/medicalreportpanel" element={<MedicalReportPanel />} />
-                <Route path="/patientprofile" element={<PatientProfile />} />           
+                <Route path="/patientprofile/:id" element={<PatientProfile />} />           
               </Route>
               <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>

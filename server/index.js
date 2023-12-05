@@ -44,14 +44,23 @@ app.post('/api/register_patient', (req, res) => {
     db.commit();
 }); 
 
-// app.get('api/patient_table', (req, res) => {
-//     const sqlRetrieve = "SELECT * FROM user"
-//     db.query (q, (err, data) => {
-//         if(err) return res.json(err)
-//         return res.json(data)
-//     })
-// });
+app.get('/api/patient_table', (req, res) => {
+    const sqlRetrieve = "SELECT * FROM user"
+    db.query (sqlRetrieve, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
 
+app.get(`/api/patient/:id`, (req, res) => {
+    const patient_id = req.params.id
+
+    const sqlRetrieve = "SELECT * FROM user WHERE patient_id= ?"
+    db.query (sqlRetrieve, [patient_id], (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
 
 
 
