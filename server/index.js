@@ -43,7 +43,6 @@ app.post('/api/register_patient', (req, res) => {
     })
     db.commit();
 }); 
-//test
 app.get('/api/patient_table', (req, res) => {
     const sqlRetrieve = "SELECT * FROM user"
     db.query (sqlRetrieve, (err, data) => {
