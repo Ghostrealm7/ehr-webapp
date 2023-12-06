@@ -11,6 +11,8 @@ import PatientPanel from './views/PatientPanel'
 import DoctorPanel from './views/DoctorPanel'
 import MedicalReportPanel from './views/MedicalReportPanel'
 import PatientProfile from './views/PatientProfile'
+import AllergyPanel from './components/AllergyTable'
+import VaccinePanel from './components/VaccineTable'
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/patientpanel" element={<PatientPanel />} />
                 <Route path="/doctorpanel" element={<DoctorPanel />} />
                 <Route path="/medicalreportpanel" element={<MedicalReportPanel />} />
+                <Route path="/allergypanel" element={<AllergyPanel />} />
+                <Route path="/vaccinepanel" element={<VaccinePanel />} />
                 <Route path="/patientprofile/:id" element={<PatientProfile />} />           
               </Route>
               <Route path="/adminview" element={<Overview />}/>

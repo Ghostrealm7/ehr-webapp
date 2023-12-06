@@ -45,7 +45,7 @@ export default function PatientTable() {
 									<Link to={`/patientprofile/${patient.patient_id}`}>#{patient.patient_id}</Link>
 								</td>
 								<td>
-									<Link to={`/patientprofile`}>{patient.name}</Link>
+									<Link to={`/patientprofile/${patient.patient_id}`}>{patient.name}</Link>
 									{/* <Link to={`/patientprofile/${patient.patient_id}`}>{patient.name}</Link> */}
 								</td>
                                 <td>{patient.gender}</td>

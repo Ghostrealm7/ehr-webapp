@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function MedicalReportTable() {
 	const [reportData, setReportData] = useState([])
 	useEffect(()=>{
-		const fetchReporttData = async ()=>{
+		const fetchReportData = async ()=>{
 			try{
 				const res = await axios.get("http://localhost:3500/api/report_table")
 				setReportData(res.data);
@@ -15,7 +15,7 @@ export default function MedicalReportTable() {
 			}
 		}
 
-		fetchReporttData()
+		fetchReportData()
 	},[])
 	return (
 		<div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">

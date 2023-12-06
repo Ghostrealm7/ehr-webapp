@@ -1,11 +1,8 @@
 import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
-
-const data = [
-	{ name: 'COVID-19', value: 540 },
-	{ name: 'Hepatitis', value: 620 },
-	{ name: 'Ebola', value: 410 }
-]
 
 const RADIAN = Math.PI / 180
 const COLORS = ['#00C49F', '#FFBB28', '#FF8042']
@@ -23,14 +20,29 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 }
 
 export default function PieChartStats2() {
+	const [virusData, setVirusData] = useState([]);
+
+	useEffect(() => {
+	  const fetchVirusData = async () => {
+		try {
+		  const res = await axios.get('http://localhost:3500/api/virus_data');
+		  setVirusData(res.data);
+		//   console.log(res.data);
+		} catch (err) {
+		  console.log(err);
+		}
+	  };
+	  fetchVirusData();
+	}, []);
+
 	return (
 		<div className="w-[20rem] h-[22rem] bg-white p-4 rounded-xl shadow-lg flex flex-col">
-			<strong className="text-gray-700 text-sm font-bold text-center">COMMON VIRUSES</strong>
+			<strong className="text-gray-700 text-sm font-bold text-center">VIRAL STATISTICS</strong>
 			<div className="mt-3 w-full flex-1 text-xs">
 				<ResponsiveContainer width="100%" height="100%">
 					<PieChart width={400} height={300}>
 						<Pie
-							data={data}
+							data={virusData}
 							cx="50%"
 							cy="45%"
 							labelLine={false}
@@ -39,7 +51,7 @@ export default function PieChartStats2() {
 							fill="#8884d8"
 							dataKey="value"
 						>
-							{data.map((_, index) => (
+							{virusData.map((_, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}
 						</Pie>

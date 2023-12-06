@@ -1,11 +1,11 @@
 import React from 'react'
-import { useEffect } from 'react'
 import { useState } from 'react'
-import axios from 'axios'
+import { useEffect } from 'react'
+import axios from 'axios';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
 
 const RADIAN = Math.PI / 180
-const COLORS = [' #C70039', ' #900C3F ', '#581845', '#FF5733']
+const COLORS = ['#00C49F', '#FFBB28', '#FF8042']
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.5
@@ -19,29 +19,30 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 	)
 }
 
-export default function PieChartStats3() {
-	const [allergyData, setAllergyData] = useState([]);
+export default function PieChartStats4() {
+	const [genderData, setGenderData] = useState([]);
 
 	useEffect(() => {
-	  const fetchAllergyData = async () => {
+	  const fetchGenderData = async () => {
 		try {
-		  const res = await axios.get('http://localhost:3500/api/allergy_data');
-		  setAllergyData(res.data);
+		  const res = await axios.get('http://localhost:3500/api/gender_data');
+		  setGenderData(res.data);
 		//   console.log(res.data);
 		} catch (err) {
 		  console.log(err);
 		}
 	  };
-	  fetchAllergyData();
+	  fetchGenderData();
 	}, []);
+
 	return (
 		<div className="w-[20rem] h-[22rem] bg-white p-4 rounded-xl shadow-lg flex flex-col">
-			<strong className="text-gray-700 text-sm text-center font-bold">ALLERGEN STATISTICS</strong>
+			<strong className="text-gray-700 text-sm font-bold text-center">GENDER STATISTICS</strong>
 			<div className="mt-3 w-full flex-1 text-xs">
 				<ResponsiveContainer width="100%" height="100%">
 					<PieChart width={400} height={300}>
 						<Pie
-							data={allergyData}
+							data={genderData}
 							cx="50%"
 							cy="45%"
 							labelLine={false}
@@ -50,7 +51,7 @@ export default function PieChartStats3() {
 							fill="#8884d8"
 							dataKey="value"
 						>
-							{allergyData.map((_, index) => (
+							{genderData.map((_, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}
 						</Pie>

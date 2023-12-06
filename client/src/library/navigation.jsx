@@ -1,5 +1,6 @@
 import { GiPlagueDoctorProfile } from "react-icons/gi";
-import { FaClinicMedical } from "react-icons/fa";
+import { FaClinicMedical, FaAllergies} from "react-icons/fa";
+import { TbVaccine } from "react-icons/tb";
 import {
 	HiOutlineViewGrid,
 	HiOutlineCube,
@@ -34,11 +35,23 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/medicalreportpanel',
 		icon: <HiOutlineCube />
 	},
-    {
+	{
 		key: 'medicalcenter',
 		label: 'Medical Center',
 		path: '/',
 		icon: <FaClinicMedical />
+	},
+	{
+		key: 'allergytable',
+		label: 'Allergy Information',
+		path: '/allergypanel',
+		icon: <FaAllergies />
+	},
+	{
+		key: 'vaccinetable',
+		label: 'Vaccine Information',
+		path: '/vaccinepanel',
+		icon: <TbVaccine />
 	},
 	{
 		key: 'messages',
