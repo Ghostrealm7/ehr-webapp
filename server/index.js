@@ -62,6 +62,24 @@ app.get(`/api/patient/:id`, (req, res) => {
 });
 
 
+app.get('/api/report_table', (req, res) => {
+    const sqlRetrieve = "SELECT medical_report.report_id,user.name AS patient_name,doctor.name AS doctor_name,medical_report.diagnosis,medical_report.visit_date FROM medical_report INNER JOIN user ON medical_report.patient_id = user.patient_id INNER JOIN doctor ON medical_report.doctor_id = doctor.doctor_id;"
+    db.query (sqlRetrieve, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
+
+
+app.get(`/api/grid_data`, (req, res) => {
+    const sqlRetrieve = "SELECT 'Patient' AS role, COUNT(*) AS total FROM user UNION ALL SELECT 'Doctor' AS role, COUNT(*) AS total FROM doctor UNION SELECT 'Hospital' AS role, COUNT(*) AS total_count FROM clinic UNION SELECT 'Report' AS role, COUNT(*) AS total_count FROM medical_report"
+    db.query (sqlRetrieve, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
+
+
 
 
 // Listen to server @PORT
