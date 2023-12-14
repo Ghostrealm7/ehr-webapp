@@ -2,6 +2,7 @@ const express = require('express')
 const mysql = require('mysql2')
 const cors = require('cors')
 const path = require('path');
+const bcrypt = require('bcrypt');
 const PORT = process.env.PORT || 3500;
 
 const app = express()
@@ -22,9 +23,77 @@ db.connect((err)=>{
 
 //Allows us to send json file as client
 app.use(express.json())
-//Initiate CORS to loosen API restrictions
+//Initiate CORS (CROSS ORIGIN RESOURCE SHARING) to loosen API restrictions
 app.use(cors())
 
+
+// REGISTER USER
+app.post('/api/register_user', async (req,res) => {
+    console.log(req.body);
+    const name = req.body.name;
+    const email = req.body.email;
+    const hashedPassword = await bcrypt.hash(req.body.password,10);
+    const role = req.body.role;
+    const sqlSearch = "SELECT * FROM user2 WHERE email = ?"
+    const sqlInsert = "INSERT INTO user2 (name, email, password, role) VALUES (?, ?, ? ,?)"
+    const search_query = mysql.format(sqlSearch,[email])
+
+    db.query (search_query, async (err, result) => {
+        if (err) throw (err)
+            console.log("----> search results")
+            console.log(result.length)
+        if (result.length !=0) {
+            console.log("User already exists")
+            res.sendStatus(409)
+        }
+        else {          
+           db.query (sqlInsert, [name, email, hashedPassword, role], (err, result) => {
+                    console.log(err);
+                    console.log("Created new user")
+                    console.log(result.insertId)
+                    res.sendStatus(201)
+                })
+        }
+    })   
+    db.commit();
+});
+
+// Authentication Login
+app.post('/login/auth', async (req, res) => {
+    const {email, password} = req.body;
+    const sqlSearch = "Select * from user2 where email = ?"
+    const search_query = mysql.format(sqlSearch,[email])
+
+    db.query (search_query, async (err, result) => {
+        if (err) throw (err)
+
+        if(result.length == 0) {
+            console.log("User doesn't exist")
+            res.sendStatus(404)
+        }
+        else {
+            const hashedPassword = result[0].password
+
+            if(await bcrypt.compare(password, hashedPassword)) {
+                console.log("Login Sucessfull!")
+                res.send(`${email} is logged in!`)
+            }
+            else {
+                console.log ("Incorrect Password")
+                res.send("Incorrect Password")
+            }
+        }
+    })
+})
+
+
+
+
+
+
+
+
+// INPUT USER INFO
 app.post('/api/register_patient', (req, res) => {
     console.log(req.body);
     const name = req.body.patientName

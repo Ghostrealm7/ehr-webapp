@@ -13,6 +13,7 @@ import MedicalReportPanel from './views/MedicalReportPanel'
 import PatientProfile from './views/PatientProfile'
 import AllergyPanel from './components/AllergyTable'
 import VaccinePanel from './components/VaccineTable'
+import RegisterUser from './views/RegisterUser'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>
               <Route path="/register_patient" element={<RegisterPatient />}/>
+              <Route path="/register_user" element={<RegisterUser />}/>
               <Route path="/register/doctor" element={<RegisterDoctor />}/>
               <Route path="/medicalreport/create" element={<HealthReportCreate />}/>
             </Routes>
