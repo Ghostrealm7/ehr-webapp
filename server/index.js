@@ -3,6 +3,8 @@ const mysql = require('mysql2')
 const cors = require('cors')
 const path = require('path');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+
 const PORT = process.env.PORT || 3500;
 
 const app = express()
@@ -34,6 +36,8 @@ app.post('/api/register_user', async (req,res) => {
     const email = req.body.email;
     const hashedPassword = await bcrypt.hash(req.body.password,10);
     const role = req.body.role;
+
+    // concept of escaping to prevent SQL injection used below -> msql.format
     const sqlSearch = "SELECT * FROM user2 WHERE email = ?"
     const sqlInsert = "INSERT INTO user2 (name, email, password, role) VALUES (?, ?, ? ,?)"
     const search_query = mysql.format(sqlSearch,[email])
@@ -61,7 +65,7 @@ app.post('/api/register_user', async (req,res) => {
 // Authentication Login
 app.post('/login/auth', async (req, res) => {
     const {email, password} = req.body;
-    const sqlSearch = "Select * from user2 where email = ?"
+    const sqlSearch = "SELECT * FROM user2 WHERE email = ?"
     const search_query = mysql.format(sqlSearch,[email])
 
     db.query (search_query, async (err, result) => {
@@ -73,10 +77,20 @@ app.post('/login/auth', async (req, res) => {
         }
         else {
             const hashedPassword = result[0].password
+            console.log(result)
 
             if(await bcrypt.compare(password, hashedPassword)) {
+                // GENERATE JWT TOKEN
+                const accessToken = jwt.sign(
+                    {
+                        email: result[0].email,
+                        id: result[0].id,
+                        role: result[0].role
+                    },
+                    "accessTokenSecretKey"
+                    )
                 console.log("Login Sucessfull!")
-                res.send(`${email} is logged in!`)
+                res.json(accessToken)
             }
             else {
                 console.log ("Incorrect Password")
@@ -93,7 +107,7 @@ app.post('/login/auth', async (req, res) => {
 
 
 
-// INPUT USER INFO
+// INPUT PATIENT INFO
 app.post('/api/register_patient', (req, res) => {
     console.log(req.body);
     const name = req.body.patientName
@@ -111,7 +125,41 @@ app.post('/api/register_patient', (req, res) => {
         console.log(err);
     })
     db.commit();
-}); 
+});
+
+//Input DOCTOR info
+app.post('/api/register_doctor', (req, res) => {
+    console.log(req.body);
+    const name = req.body.name
+    const email = req.body.email
+    const password = req.body.password
+    const phone = req.body.phone
+    const gender = req.body.gender
+    const license_num = req.body.license
+    const specialty =  req.body.specialty
+
+    const sqlInsert = "INSERT INTO doctor (name, email, password, phone, gender, license_num, specialty) VALUES (?,?,?,?,?,?,?)"
+    db.query(sqlInsert, [name, email, password, phone, gender, license_num, specialty], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
+});
+
+//Input ALLERGY TO PATIENT
+app.post('/api/add_allergy/:id', (req, res) => {
+    console.log(req.body);
+    const patient_id = req.params.id
+    const allergy_id = req.body.allergy_id
+  
+
+    const sqlInsert = "INSERT INTO patient_allergy (patient_id, allergy_id) VALUES (?,?)"
+    db.query(sqlInsert, [patient_id, allergy_id], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
+});
+
+//ALL patient table API
 app.get('/api/patient_table', (req, res) => {
     const sqlRetrieve = "SELECT * FROM user"
     db.query (sqlRetrieve, (err, data) => {
@@ -120,6 +168,17 @@ app.get('/api/patient_table', (req, res) => {
     })
 });
 
+//ALL doctor Table API
+app.get('/api/doctor_table', (req, res) => {
+    const sqlRetrieve = "SELECT * FROM doctor"
+    db.query (sqlRetrieve, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
+
+
+//Individual Patient profile API
 app.get(`/api/patient/:id`, (req, res) => {
     const patient_id = req.params.id
 
@@ -130,6 +189,7 @@ app.get(`/api/patient/:id`, (req, res) => {
     })
 });
 
+//INDIVIDUAL MEDICAL REPORT API (ALL report for specific patient)
 app.get(`/api/patient/medical_report/:id`, (req, res) => {
     const patient_id = req.params.id
 
@@ -140,6 +200,7 @@ app.get(`/api/patient/medical_report/:id`, (req, res) => {
     })
 });
 
+//PATIENT ALLERGY API
 app.get(`/api/patient/allergy/:id`, (req, res) => {
     const patient_id = req.params.id
 
@@ -150,10 +211,31 @@ app.get(`/api/patient/allergy/:id`, (req, res) => {
     })
 });
 
-
+//ALL REPORT API
 app.get('/api/report_table', (req, res) => {
     const sqlRetrieve = "SELECT medical_report.report_id,user.name AS patient_name,doctor.name AS doctor_name,medical_report.diagnosis,medical_report.visit_date FROM medical_report INNER JOIN user ON medical_report.patient_id = user.patient_id INNER JOIN doctor ON medical_report.doctor_id = doctor.doctor_id;"
     db.query (sqlRetrieve, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
+
+// Individual Report DETAILS API
+app.get('/api/report/:id', (req, res) => {
+    const report_id = req.params.id
+
+    const sqlRetrieve = "SELECT medical_report.report_id, user.patient_id AS patient_id, user.gender, user.bloodgroup, user.email, user.dob, user.name AS patient_name, doctor.doctor_id AS doctor_id, doctor.specialty, doctor.name AS doctor_name, medical_report.diagnosis,medical_report.visit_date,medical_report.visit_reason,medical_report.test,medical_report.test_result,medical_report.temperature,medical_report.blood_pressure,medical_report.heart_rate,medical_report.blood_oxygen,medical_report.remarks FROM medical_report INNER JOIN user ON medical_report.patient_id = user.patient_id INNER JOIN doctor ON medical_report.doctor_id = doctor.doctor_id WHERE report_id = ?;"
+    db.query (sqlRetrieve, [report_id], (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+});
+
+app.get('/api/report/prescription/:id', (req, res) => {
+    const report_id = req.params.id
+
+    const sqlRetrieve = "SELECT medical_report.report_id, prescription.prescription_id, medicine.medicine_name, medicine.dosage FROM medical_report INNER JOIN prescription ON medical_report.report_id = prescription.report_id INNER JOIN medicine ON prescription.prescription_id = medicine.prescription_id WHERE medical_report.report_id = ?;"
+    db.query (sqlRetrieve, [report_id], (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
     })

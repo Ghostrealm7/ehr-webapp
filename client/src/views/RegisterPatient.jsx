@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { RadioGroup } from '@headlessui/react';
 
 export default function RegisterPatient() {
   const [patientName, setPatientName] = useState("");
@@ -151,19 +150,20 @@ export default function RegisterPatient() {
                       />
                     </div>
                   </div>
-                  {/* <RadioGroup value={gender} onChange={setGender}>
-                    <RadioGroup.Label>Gender</RadioGroup.Label>
-                    <RadioGroup.Option value="male">
-                      {({ checked }) => (
-                        <span className={checked ? 'bg-blue-800' : ''}>Male</span>
-                      )}
-                    </RadioGroup.Option>
-                    <RadioGroup.Option value="female">
-                      {({ checked }) => (
-                        <span className={checked ? 'bg-blue-800' : ''}>Female</span>
-                      )}
-                    </RadioGroup.Option>
-                  </RadioGroup>                   */}
+                  <label className="block text-sm font-medium text-gray-700">
+                            Gender
+                            <select 
+                                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                name="gender" 
+                                value={gender}
+                                onChange={(e) => {
+                                    setGender(e.target.value);
+                                }}>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                            </label>
+                            <br />  
                   <div>
                     <label htmlFor="blood_group" className="block text-sm font-medium text-gray-700">
                       Blood Group

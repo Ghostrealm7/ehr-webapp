@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function RegisterUser() {
   const [name, setName] = useState("");
@@ -81,6 +82,7 @@ export default function RegisterUser() {
                             <button type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             onClick={submitUserData}>Register User</button>
+                            <div>Already have an account? <Link to={`/login`}>Sign in here</Link></div>
                     </form>
                 </div>
             </div>

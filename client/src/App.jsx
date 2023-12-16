@@ -14,6 +14,7 @@ import PatientProfile from './views/PatientProfile'
 import AllergyPanel from './components/AllergyTable'
 import VaccinePanel from './components/VaccineTable'
 import RegisterUser from './views/RegisterUser'
+import MedicalReportDetails from './views/MedicalReportDetails'
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
                 <Route path="/medicalreportpanel" element={<MedicalReportPanel />} />
                 <Route path="/allergypanel" element={<AllergyPanel />} />
                 <Route path="/vaccinepanel" element={<VaccinePanel />} />
-                <Route path="/patientprofile/:id" element={<PatientProfile />} />           
+                <Route path="/patientprofile/:id" element={<PatientProfile />} />
+                <Route path="/report/:id" element={<MedicalReportDetails />} />          
               </Route>
               <Route path="/adminview" element={<Overview />}/>
               <Route path="/login" element={<LoginView />}/>

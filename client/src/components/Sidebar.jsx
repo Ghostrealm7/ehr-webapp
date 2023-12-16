@@ -4,11 +4,17 @@ import { Link, useLocation } from 'react-router-dom'
 import { MdHealthAndSafety } from "react-icons/md";
 import { HiOutlineLogout } from 'react-icons/hi'
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../library/navigation';
+import { useNavigate } from 'react-router-dom';
 
 const linkClass =
 	'flex items-center gap-2 px-3 py-2 hover:bg-gray-600 hover:no-underline active:bg-indigo-900 rounded-md text-base'
 
 export default function Sidebar() {
+	const navigate = useNavigate();
+	const logout = () => {
+		sessionStorage.removeItem("accessToken")
+		navigate('/login')
+	}
   return (
 		<div className="bg-gray-800 w-60 p-3 flex flex-col">
 			<div className="flex items-center gap-2 px-1 py-3 text-white">
@@ -24,7 +30,9 @@ export default function Sidebar() {
 				{DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
-				<div className={classNames(linkClass, 'cursor-pointer text-red-500 font-bold')}>
+				<div 
+				onClick={logout}
+				className={classNames(linkClass, 'cursor-pointer text-red-500 font-bold')}>
 					<span className="text-xl">
 						<HiOutlineLogout />
 					</span>

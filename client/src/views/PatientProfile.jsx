@@ -6,13 +6,27 @@ import {useParams} from "react-router-dom"
 import axios from 'axios';
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
+import Modal from '../components/Modal';
 
 export default function PatientProfile() {
+	const [allergy_id, setAllergy_id] = useState()
+  
+	const submitUserData = async e => {
+	  e.preventDefault()
+	  try {
+		  await axios.post(`http://localhost:3500/api/add_allergy/${id}`, {
+		  allergy_id: allergy_id,
+		})
+	}catch(err){
+	  console.log(err)
+	}
+  }
 	const {id}  = useParams()
 // Very important to set useState([]) or ({}) parameter properly...make sure you know what data you will be receiving.
 	const [singlePatientData, setSinglePatientData] = useState([])
 	const [patientMedicalReport, setPatientMedicalReport] = useState([])
 	const [patientAllergyData, setPatientAllergyData] = useState([])
+	const [showModal, setShowModal] = useState(false);
 	useEffect(()=>{
 		const fetchPatientData = async ()=>{
 			try{
@@ -97,13 +111,42 @@ export default function PatientProfile() {
 					</div>
 				))}
 				<div className='pt-4'>
-					<button
-						className="flex py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-						>
-						<div className=''>
-							<p className=''>Edit Details</p>
-						</div>
-					</button>
+				<button onClick={()=>setShowModal(true)} className='flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+					ADD ALLERGY
+				</button>
+				<Modal isVisible={showModal} onClose={()=>setShowModal(false)}> 
+				<div className="flex-1 bg-white flex justify-center items-center">
+                <div className="max-w-md w-full space-y-6 p-6 bg-white rounded-lg shadow-md">
+                    <h2 className="text-3xl font-extrabold text-gray-900" >ADD ALLERGY</h2>
+                    <form 
+                        className="mt-8 space-y-4"
+                        onSubmit={submitUserData}>
+                            
+                            <label className="block text-sm font-medium text-gray-700">
+                            Select Allergy
+                            <select 
+                                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                name="gender" 
+                                value={allergy_id}
+                                onChange={(e) => {
+                                    setAllergy_id(e.target.value);
+                                }}>
+                                <option value="1">Rhinitis</option>
+                                <option value="2">Dermatitis</option>
+								<option value="3">Drug Allergy</option>
+								<option value="4">Food Allergy</option>
+								<option value="5">Skin Allergy</option>
+								<option value="6">Asthma</option>
+                            </select>
+                            </label>
+                            <br />
+                            <button type="submit"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            onClick={submitUserData}>Add Allergy</button>
+                    </form>
+                </div>
+            	</div>  
+				</Modal>
 				</div>
 		</div>
 
