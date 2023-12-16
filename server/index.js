@@ -145,6 +145,29 @@ app.post('/api/register_doctor', (req, res) => {
     db.commit();
 });
 
+//Input MEDICAL REPORT
+app.post('/api/register_report', (req, res) => {
+    console.log(req.body);
+    const patient_id = req.body.patient_id
+    const visit_date = req.body.visit_date
+    const visit_reason = req.body.visit_reason
+    const diagnosis = req.body.diagnosis
+    const test = req.body.test
+    const test_result = req.body.test_result
+    const temperature =  req.body.temperature
+    const blood_pressure = req.body.blood_pressure
+    const blood_oxygen = req.body.blood_oxygen
+    const heart_rate = req.body.heart_rate
+    const doctor_id = req.body.doctor_id
+    const remarks = req.body.remarks
+
+    const sqlInsert = "INSERT INTO medical_report (patient_id, doctor_id, visit_date, visit_reason, diagnosis, test, test_result, temperature, blood_pressure, blood_oxygen, heart_rate, remarks ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+    db.query(sqlInsert, [patient_id, doctor_id, visit_date, visit_reason, diagnosis, test, test_result, temperature, blood_pressure, blood_oxygen, heart_rate, remarks], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
+});
+
 //Input ALLERGY TO PATIENT
 app.post('/api/add_allergy/:id', (req, res) => {
     console.log(req.body);
@@ -157,6 +180,47 @@ app.post('/api/add_allergy/:id', (req, res) => {
         console.log(err);
     })
     db.commit();
+});
+
+//Input VACCINATION TO PATIENT
+app.post('/api/add_vaccine/:id', (req, res) => {
+    console.log(req.body);
+    const patient_id = req.params.id
+    const vaccine_id = req.body.vaccine_id
+    const vaccination_date = req.body.date
+    const vaccine_administrator = req.body.vaccine_adminstrator
+  
+
+    const sqlInsert = "INSERT INTO patient_vaccine_clinic (patient_id, vaccine_id, vaccination_date, vaccine_adminstrator) VALUES (?,?,?,?)"
+    db.query(sqlInsert, [patient_id, vaccine_id, vaccination_date, vaccine_administrator], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
+});
+
+//Input pres TO med report
+app.post('/api/add_pres/:id', (req, res) => {
+    console.log(req.body);
+    const prescription_id = req.params.id
+    const medicine_name = req.body.medicine_name
+    const dosage = req.body.dosage
+  
+
+    const sqlInsert = "INSERT INTO medicine (medicine_name, prescription_id, dosage) VALUES (?,?,?)"
+    db.query(sqlInsert, [medicine_name, prescription_id, dosage], (err, result) =>{
+        console.log(err);
+    })
+    db.commit();
+});
+// Display Vaccination in Patient profile
+app.get('/api/patient/vaccination/:id', (req, res) => {
+    const patient_id = req.params.id
+
+    const sqlRetrieve = "SELECT vaccine.name, patient_vaccine_clinic.vaccination_date FROM patient_vaccine_clinic JOIN vaccine ON patient_vaccine_clinic.vaccine_id = vaccine.vaccine_id WHERE patient_vaccine_clinic.patient_id = ?;"
+    db.query (sqlRetrieve, [patient_id], (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
 });
 
 //ALL patient table API
@@ -231,6 +295,7 @@ app.get('/api/report/:id', (req, res) => {
     })
 });
 
+// PRESCRIPTION for REPORT API
 app.get('/api/report/prescription/:id', (req, res) => {
     const report_id = req.params.id
 

@@ -38,7 +38,7 @@ function App() {
               <Route path="/register_patient" element={<RegisterPatient />}/>
               <Route path="/register_user" element={<RegisterUser />}/>
               <Route path="/register/doctor" element={<RegisterDoctor />}/>
-              <Route path="/medicalreport/create" element={<HealthReportCreate />}/>
+              <Route path="/createmedicalreport/:id" element={<HealthReportCreate />}/>
             </Routes>
         </Router>
       </div>
